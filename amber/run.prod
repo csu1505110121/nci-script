@@ -1,0 +1,25 @@
+#!/bin/bash
+
+#PBS -l walltime=12:00:00
+#PBS -l mem=100000MB
+#PBS -q normal
+#PBS -l ncpus=4
+#PBS -l software=amber
+#PBS -l storage=gdata/eh83+scratch/eh83  # remember to revise the project ID
+#PBS -l wd
+#PBS -P eh83                             # same as above
+
+module load amber/22
+
+export DO_PARALLEL='mpirun -np 2'
+
+#pmemd.MPI -O -i 03.nvt.mdin \
+#mpirun pmemd.MPI -O -i 03.nvt.mdin \
+#$DO_PARALLEL pmemd.MPI -O -i 03.nvt.mdin \
+pmemd -O -i 03.nvt.mdin \
+		-o 03.prod.01.mdout \
+		-p ../C60.gaff.prmtop \
+		-c ../02heat/02.heat.rst \
+		-x 03.prod.01.crd \
+		-r 03.prod.01.rst \
+		-inf 03.prod.01.mdinfo
