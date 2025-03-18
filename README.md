@@ -10,3 +10,6 @@ NCI Script for submitting jobs, continuing update
 * lammps
 
 
+## script for copying large size data onto mdss storage system
+
+see directory `copyLF`
